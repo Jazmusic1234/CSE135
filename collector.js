@@ -1,51 +1,40 @@
 export let timer, seconds = 0;
-export let staticInfo = {};
-export let performance = {};
+export let static_perform = {};
 export let activity = {};
 
 window.addEventListener("load", function(event) {
-  staticInfo.userAgent = this.navigator.userAgent;
-  staticInfo.language = this.navigator.language;
-  staticInfo.cookies = this.navigator.cookieEnabled;
-  staticInfo.allowsJS = true;
+  static_perform.userAgent = this.navigator.userAgent;
+  static_perform.language = this.navigator.language;
+  static_perform.cookies = this.navigator.cookieEnabled;
+  static_perform.allowsJS = true;
 
   if(this.document.getElementsByTagName('img')[0].parent.tagName == 'noscript') {
-    staticInfo.allowsImgs = false;
+    static_perform.allowsImgs = false;
   } else {
-    staticInfo.allowsImgs = true;
+    static_perform.allowsImgs = true;
   }
 
   if(this.document.getElementsByTagName('link')[0].parent.tagName == 'noscript') {
-    staticInfo.allowsCSS = false;
+    static_perform.allowsCSS = false;
   } else {
-    staticInfo.allowsCSS = true;
+    static_perform.allowsCSS = true;
   }
   
-  staticInfo.screenWidth = this.screen.width;
-  staticInfo.screenHeight = this.screen.height;
-  staticInfo.windowWidth = window.innerWidth;
-  staticInfo.windowHeight = window.innerHeight;
-  staticInfo.networkConnection = this.navigator.connection.effectiveType;
+  static_perform.screenWidth = this.screen.width;
+  static_perform.screenHeight = this.screen.height;
+  static_perform.windowWidth = window.innerWidth;
+  static_perform.windowHeight = window.innerHeight;
+  static_perform.networkConnection = this.navigator.connection.effectiveType;
 
-  performance.timingObj = this.performance.timing;
-  performance.startLoad = this.performance.timing.domContentLoadedEventStart;
-  performance.endLoad = this.performance.timing.domContentLoadedEventEnd;
-  performance.totalLoadTime = performance.endLoad - performance.startLoad;
+  static_perform.timingObj = this.performance.timing;
+  static_perform.startLoad = this.performance.timing.domContentLoadedEventStart;
+  static_perform.endLoad = this.performance.timing.domContentLoadedEventEnd;
+  static_perform.totalLoadTime = static_perform.endLoad - static_perform.startLoad;
 
-  print("Static: ");
-  print(staticInfo);
 
-  fetch('chenjc.site/api/static', {
+  fetch('chenjc.site/api/static_perform', {
     method: 'POST',
-    body: JSON.stringify(staticInfo)
-  });
-
-  print("Performance: ");
-  print(performance);
-
-  fetch('chenjc.site/api/performance', {
-    method: 'POST',
-    body: JSON.stringify(performance)
+    body: JSON.stringify(static_perform)
   });
 });
 
