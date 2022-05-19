@@ -1,12 +1,9 @@
 
 let timer, seconds = 0;
-let idSP = 0;
-let idA = 0;
 let static_perform = {};
 let activity = {};
 
 window.addEventListener("load", function(event) {
-  activity.id = idA++;
   activity.mousemove = 0;
   activity.cursorX = 0;
   activity.cursorY = 0;
@@ -23,7 +20,6 @@ window.addEventListener("load", function(event) {
   activity.page = "";
   activity.userExit = 0;
 
-  static_perform.id = idSP++;
   static_perform.cookie = Math.random().toString(16).substr(2, 8);
   static_perform.userAgent = this.navigator.userAgent;
   static_perform.language = this.navigator.language;
@@ -135,7 +131,6 @@ function sendActivity() {
   .then(response => response.json())
   .then(data => console.log(data));
 
-  activity.id = idA++;
 }
 
 setInterval(sendActivity(), 2000);

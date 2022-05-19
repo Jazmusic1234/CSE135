@@ -68,7 +68,7 @@ exports.postStaticAndPerform = (req, res, next) => {
  }
  console.log(values);
  conn.query(
-   "INSERT INTO static_perform VALUES (?)",
+   "INSERT INTO static_perform VALUES (NULL, ?)",
    [values],
    function (err, data, fields) {
      if (err) return next(new AppError(err, 500));
@@ -88,7 +88,7 @@ exports.postActivity = (req, res, next) => {
  }
  
  conn.query(
-   "INSERT INTO activity VALUES(?)",
+   "INSERT INTO activity VALUES(NULL, ?)",
    [values],
    function (err, data, fields) {
      if (err) return next(new AppError(err, 500));
