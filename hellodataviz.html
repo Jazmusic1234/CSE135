@@ -22,35 +22,6 @@
 
 <body>
 
-<!-- <?php
-  /* Open connection to "zing_db" MySQL database. */
-  $mysqli = new mysqli("localhost", "jcc001", "CSE135hw1!", "chenjc_db");
-
-  /* Check the connection. */
-  if (mysqli_connect_errno()) {
-      printf("Connect failed: %s\n", mysqli_connect_error());
-      exit();
-  }
-
-  /* Fetch result set from t_test table */
-  $data=mysqli_query($mysqli, "SELECT * FROM static_perform");  
-  ?>
-  var myData=[<?php
-while($info=mysqli_fetch_array($data))
-    echo $info[ 'f_data' ].','; /* We use the concatenation operator '.' to add comma delimiters after each data value. */
-?>];
-<?php
-$data=mysqli_query($mysqli, "SELECT * FROM static_perform");
-?>
-var myLabels=[<?php
-while($info=mysqli_fetch_array($data))
-    echo '"'.$info[ 'f_name' ].'",'; /* The concatenation operator '.' is used here to create string values from our database names. */
-?>];
-
-<?php
-/* Close the connection */
-$mysqli->close();
-?> -->
   <div id="line" class="chart-container">
   </div>
 
