@@ -7,9 +7,10 @@ exports.getAllStaticAndPerform = (req, res, next) => {
    res.status(200).json({
      status: "success",
      length: data.length,
-     data: data,
+     data: data
    });
  });
+
 };
 
 exports.getAllActivity = (req, res, next) => {
@@ -18,7 +19,7 @@ exports.getAllActivity = (req, res, next) => {
    res.status(200).json({
      status: "success",
      length: data.length,
-     data: data,
+     data: data
    });
  });
 };
@@ -35,7 +36,7 @@ exports.getStaticAndPerform = (req, res, next) => {
      res.status(200).json({
        status: "success",
        length: data.length,
-       data: data,
+       data: data
      });
    }
  );
@@ -61,15 +62,19 @@ exports.getActivity = (req, res, next) => {
 
 exports.postStaticAndPerform = (req, res, next) => {
  if (!req.body) return next(new AppError("No form data found", 404));
- const values = [req.body.name, "pending"];
+ var values = [];
+ for (var key in req.body) {
+   values.push(req.body[key]);
+ }
+ console.log(values);
  conn.query(
-   "INSERT INTO static_perform (name, status) VALUES(?)",
+   "INSERT INTO static_perform VALUES (?)",
    [values],
    function (err, data, fields) {
      if (err) return next(new AppError(err, 500));
      res.status(201).json({
        status: "success",
-       message: "added static or performance info",
+       message: "static and performance data added!"
      });
    }
  );
@@ -77,49 +82,19 @@ exports.postStaticAndPerform = (req, res, next) => {
 
 exports.postActivity = (req, res, next) => {
  if (!req.body) return next(new AppError("No form data found", 404));
- const values = [req.body.name, "pending"];
+ var values = [];
+ for (var key in req.body) {
+   values.push(req.body[key]);
+ }
+ 
  conn.query(
-   "INSERT INTO activity (cookie, userAgent, language, cookies, allowsJS, allowsImgs, allowsCSS, screenWidth, screenHeight, windowWidth, windowHeight, networkConnection, timingObj, startLoad, endLoad, totalLoadTime) VALUES(?)",
+   "INSERT INTO activity VALUES(?)",
    [values],
    function (err, data, fields) {
      if (err) return next(new AppError(err, 500));
      res.status(201).json({
        status: "success",
-       message: "added activity info",
-     });
-   }
- );
-};
-
-exports.updateStaticAndPerform = (req, res, next) => {
- if (!req.params.id) {
-   return next(new AppError("Id not found", 404));
- }
- conn.query(
-   "UPDATE static_perform SET status='completed' WHERE id=?",
-   [req.params.id],
-   function (err, data, fields) {
-     if (err) return next(new AppError(err, 500));
-     res.status(201).json({
-       status: "success",
-       message: "Static/performance info updated!",
-     });
-   }
- );
-};
-
-exports.updateActivity = (req, res, next) => {
- if (!req.params.id) {
-   return next(new AppError("Id not found", 404));
- }
- conn.query(
-   "UPDATE activity SET status='completed' WHERE id=?",
-   [req.params.id],
-   function (err, data, fields) {
-     if (err) return next(new AppError(err, 500));
-     res.status(201).json({
-       status: "success",
-       message: "Activity info updated!",
+       message: "added activity data!",
      });
    }
  );

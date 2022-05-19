@@ -6,13 +6,44 @@
 </head>
 
 <body>
-  <zing-grid caption="Static and Performance Data" layout="row" layout-controls>
-    <zg-data src="/api/static_perform"></zg-data>
+
+  <zing-grid id='static_perform_grid' caption="Static and Performance Data" layout="row" layout-controls>
   </zing-grid>
   
-  <zing-grid caption="Activity Data" layout="row" layout-controls>
-    <zg-data src="/api/activity"></zg-data>
+  <zing-grid id='activity_grid' caption="Activity Data" layout="row" layout-controls>
   </zing-grid>
+
+  <script>
+window.addEventListener('load', () => {
+  const sp_grid = document.getElementById('static_perform_grid');
+  const a_grid = document.getElementById('activity_grid');
+
+  let staticPerfData = setInterval(() => {
+    fetch('/api/static_perform/posts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => sp_grid.setData(data.data))
+    .catch(err => console.error('Error occurred', err));
+  }, 1000);
+
+  let activityData = setInterval(() => {
+    fetch('/api/activity/posts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => a_grid.setData(data.data))
+    .catch(err => console.error('Error occurred', err));
+    }, 1000);
+})
+  
+  </script>
 </body>
 
 </html>

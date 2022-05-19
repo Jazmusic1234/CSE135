@@ -18,6 +18,13 @@ app.get("/", (req, res) => {
   res.send("Welcome to your App!")
 })
 
+// app.post("/static_perform/posts", (req, res) => {
+//   console.log('post');
+// })
+
+// app.get("/static_perform/posts", (req, res) => {
+//   console.log('get');
+// })
 
 app.listen(PORT, function () {
   console.log(`Express server listening on port ${PORT}`)
